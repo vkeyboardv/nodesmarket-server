@@ -9,9 +9,9 @@ module.exports = async function (fastify, opts) {
     const foundKey = await db.findKey(key);
     
     if (foundKey) {
-      reply.status(200).send(true);
+      return reply.status(200).send(true);
     } else {
-      reply.status(403).send(false);
+      return reply.status(403).send(false);
     }
   })
 }

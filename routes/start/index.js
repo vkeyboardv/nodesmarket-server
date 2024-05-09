@@ -20,14 +20,14 @@ module.exports = async function (fastify, opts) {
       const foundKey = await db.findKey(key);
     
       if (!foundKey) {
-        reply.status(403).send(false);
+        return reply.status(403).send(false);
       }
     
       const data = await getShellData('start.sh');
 
-      reply.type('text/plain').send(data);
+      return reply.type('text/plain').send(data);
     } catch (err) {
-      reply.status(500).send('Error reading the bash file.');
+      return reply.status(500).send(false);
     }
   })
 }

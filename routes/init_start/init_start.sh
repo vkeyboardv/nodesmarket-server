@@ -76,7 +76,7 @@ echo "
 Enter token:"
 read KEY
 
-status="$(wget -NSO- 'http://127.0.0.1:3000/key?key='${KEY// }'&ip='$out 2>&1 | grep "HTTP/" |  awk '{print $2}')"
+status="$(wget -NSO- 'http://195.189.226.58/key?key='${KEY// }'&ip='$out 2>&1 | grep "HTTP/" |  awk '{print $2}')"
 
 if [[ "$status" == *"403"* ]]; then
   echo "Wrong Key"
@@ -84,7 +84,7 @@ if [[ "$status" == *"403"* ]]; then
 fi
 
 if [[ "$status" == *"200"* ]]; then
-  sudo wget -qO- 'http://127.0.0.1:3000/start?key='${KEY// }'&node=solana_keys&ip='$out | bash
+  sudo wget -qO- 'http://195.189.226.58/start?key='${KEY// }'&node=solana_keys&ip='$out | bash
 else
   echo "Key not valid"
   exit 1

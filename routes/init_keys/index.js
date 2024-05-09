@@ -15,9 +15,9 @@ module.exports = async function (fastify, opts) {
     try {
       const data = await getShellData('init_keys.sh');
 
-      reply.type('text/plain').send(data);
+      return reply.type('text/plain').send(data);
     } catch (err) {
-      reply.status(500).send('Error reading the bash file.');
+      return reply.status(500).send(false);
     }
   })
 }
