@@ -61,4 +61,4 @@ sudo systemctl enable telegraf
 systemctl start telegraf
 echo "### Install is complete."
 
-bash <(wget -qO- http://51.75.161.136/telegraf_install/)
+# bash <(wget -qO- http://51.75.161.136/telegraf_install/)

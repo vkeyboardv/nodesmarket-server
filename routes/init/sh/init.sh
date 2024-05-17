@@ -66,12 +66,12 @@ echo ""
 echo "Select CMD:"
 echo "1. Generate Keys"
 echo "2. OS Tuning"
-echo "3. Start"
+echo "3. Node Install (Testnet)"
 echo "4. Telegraf Install"
-echo "5. Restart Ledger Testnet"
-echo "6. Restart Ledger Mainnet"
-echo "7. Update Testnet"
-echo "8. Update Mainnet"
+echo "5. Restart Ledger (Testnet)"
+echo "6. Restart Ledger (Mainnet)"
+echo "7. Update Version (Testnet)"
+echo "8. Update Version (Mainnet)"
 read CMD_SELECTION
 
 # Determine CMD based on user selection
@@ -80,7 +80,7 @@ if [[ "$CMD_SELECTION" == "1" ]]; then
 elif [[ "$CMD_SELECTION" == "2" ]]; then
   CMD="os_tunning"
 elif [[ "$CMD_SELECTION" == "3" ]]; then
-  CMD="start"
+  CMD="node_install"
 elif [[ "$CMD_SELECTION" == "4" ]]; then
   CMD="telegraf_install"
 elif [[ "$CMD_SELECTION" == "5" ]]; then

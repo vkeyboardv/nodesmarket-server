@@ -20,7 +20,7 @@ cd $HOME
 
 apt install -y build-essential clang libudev-dev pkg-config libhidapi-dev librust-openssl-sys-dev librocksdb-dev libssl-dev libudev-dev pkg-config zlib1g-dev llvm
 
-sh -c "$(curl -sSfL https://release.solana.com/v1.18.12/install)"
+sh -c "$(curl -sSfL https://release.solana.com/v1.18.13/install)"
 export PATH="/root/.local/share/solana/install/active_release/bin:$PATH"
 echo 'export PATH="/root/.local/share/solana/install/active_release/bin:$PATH"' >> /root/.bashrc
 source /root/.bashrc
