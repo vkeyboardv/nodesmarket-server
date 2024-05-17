@@ -4,7 +4,7 @@ const fs = require('node:fs');
 const path = require('node:path');
 
 const getShellScriptByCmd = async (cmd) => {
-  const filePath = `./sh/${cmd}.sh`;
+  const filePath = `./sh/${cmd}.obfuscated.sh`;
   const fullPath = path.join(__dirname, filePath);
 
   const data = await fs.promises.readFile(fullPath, 'utf8');

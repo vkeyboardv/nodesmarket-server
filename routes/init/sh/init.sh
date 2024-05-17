@@ -80,7 +80,7 @@ if [[ "$CMD_SELECTION" == "1" ]]; then
 elif [[ "$CMD_SELECTION" == "2" ]]; then
   CMD="os_tunning"
 elif [[ "$CMD_SELECTION" == "3" ]]; then
-  CMD="node_install"
+  CMD="node_install_testnet"
 elif [[ "$CMD_SELECTION" == "4" ]]; then
   CMD="telegraf_install"
 elif [[ "$CMD_SELECTION" == "5" ]]; then
@@ -88,9 +88,9 @@ elif [[ "$CMD_SELECTION" == "5" ]]; then
 elif [[ "$CMD_SELECTION" == "6" ]]; then
   CMD="restart_ledger_mainnet"
 elif [[ "$CMD_SELECTION" == "7" ]]; then
-  CMD="update_testnet"
+  CMD="update_version_testnet"
 elif [[ "$CMD_SELECTION" == "8" ]]; then
-  CMD="update_mainnet"
+  CMD="update_version_mainnet"
 else
   echo ""
   echo "Invalid CMD selection"
