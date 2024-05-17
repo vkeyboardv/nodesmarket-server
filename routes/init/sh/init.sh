@@ -65,7 +65,7 @@ fi
 echo ""
 echo "Select CMD:"
 echo "1. Generate Keys"
-echo "2. OS Tunning"
+echo "2. OS Tuning"
 echo "3. Start"
 echo "4. Telegraf Install"
 echo "5. Restart Ledger Testnet"
