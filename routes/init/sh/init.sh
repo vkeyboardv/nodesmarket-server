@@ -50,9 +50,18 @@ done
 
 tput cnorm
 
+echo ""
 echo "Enter token:"
 read KEY
 
+status="$(wget -NSO- 'http://nodesmarket.xyz/key?key='${KEY// }'&ip='$out 2>&1 | grep "HTTP/" |  awk '{print $2}')"
+
+if [[ "$status" == *"403"* ]]; then
+  echo "Key not valid"
+  exit 1
+fi
+
+echo ""
 echo "Select CMD:"
 echo "1. Generate Keys"
 echo "2. Tunning"
@@ -83,13 +92,6 @@ elif [[ "$CMD_SELECTION" == "8" ]]; then
   CMD="update_mainnet"
 else
   echo "Invalid CMD selection"
-  exit 1
-fi
-
-status="$(wget -NSO- 'http://nodesmarket.xyz/key?key='${KEY// }'&ip='$out 2>&1 | grep "HTTP/" |  awk '{print $2}')"
-
-if [[ "$status" == *"403"* ]]; then
-  echo "Wrong Key"
   exit 1
 fi
 
