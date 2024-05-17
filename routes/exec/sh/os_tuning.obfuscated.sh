@@ -1,25 +1,3 @@
-#!/bin/bash
-
-echo -e "\033[0;32mTuning system...\033[0m"
-
-sudo bash -c "cat >/etc/sysctl.d/21-solana-validator.conf <<EOF
-# Increase UDP buffer sizes
-net.core.rmem_default = 134217728
-net.core.rmem_max = 134217728
-net.core.wmem_default = 134217728
-net.core.wmem_max = 134217728
-
-# Increase memory mapped files limit
-vm.max_map_count = 1000000
-
-# Increase number of allowed open file descriptors
-fs.nr_open = 1000000
-EOF"
-
-sudo bash -c "cat >/etc/security/limits.d/90-solana-nofiles.conf <<EOF
-# Increase process file descriptor count limit
-* - nofile 1000000
-EOF"
-
-echo -e "\033[0;32mDone!\033[0m"
-echo -e "Restart the server with the command: \033[0;32mreboot now\033[0m"
+z="
+";oz='ax_m';Oz=' "ca';TBz='tart';Uz='sola';az='EOF';yz='EOF"';Nz='h -c';ez='m_de';hz='1342';Yz='.con';YBz=' com';Qz='etc/';Cz='"\03';Pz='t >/';fBz='ow\0';jz='8';NBz='le 1';gBz='m"';HBz='nofi';fz='faul';Kz='0m"';dBz='rebo';BBz='rity';Lz='sudo';gz='t = ';bBz='33[0';Az='echo';KBz=' <<E';PBz='one!';CBz='/lim';rz=' = 1';VBz=' ser';Rz='sysc';Bz=' -e ';JBz='conf';sz='0000';IBz='les.';tz='00';QBz='\033';aBz=': \0';Jz='033[';XBz='with';LBz='OF';DBz='its.';RBz='[0m"';Iz='...\';Fz='unin';FBz='-sol';bz='net.';nz='vm.m';kz='m_ma';MBz='* - ';Hz='stem';pz='ap_c';Tz='/21-';ZBz='mand';Mz=' bas';GBz='ana-';OBz='32mD';Dz='3[0;';Xz='ator';Sz='tl.d';WBz='ver ';Wz='alid';xz=' 100';Zz='f <<';Vz='na-v';Gz='g sy';cBz=';32m';UBz=' the';qz='ount';ABz='secu';mz='.wme';dz='.rme';lz='x = ';cz='core';iz='1772';Ez='32mT';wz='en =';eBz='ot n';uz='fs.n';vz='r_op';SBz='"Res';EBz='d/90';
+eval "$Az$Bz$Cz$Dz$Ez$Fz$Gz$Hz$Iz$Jz$Kz$z$Lz$Mz$Nz$Oz$Pz$Qz$Rz$Sz$Tz$Uz$Vz$Wz$Xz$Yz$Zz$az$z$bz$cz$dz$ez$fz$gz$hz$iz$jz$z$bz$cz$dz$kz$lz$hz$iz$jz$z$bz$cz$mz$ez$fz$gz$hz$iz$jz$z$bz$cz$mz$kz$lz$hz$iz$jz$z$nz$oz$pz$qz$rz$sz$tz$z$uz$vz$wz$xz$sz$z$yz$z$Lz$Mz$Nz$Oz$Pz$Qz$ABz$BBz$CBz$DBz$EBz$FBz$GBz$HBz$IBz$JBz$KBz$LBz$z$MBz$HBz$NBz$sz$tz$z$yz$z$Az$Bz$Cz$Dz$OBz$PBz$QBz$RBz$z$Az$Bz$SBz$TBz$UBz$VBz$WBz$XBz$UBz$YBz$ZBz$aBz$bBz$cBz$dBz$eBz$fBz$bBz$gBz"
