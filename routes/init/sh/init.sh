@@ -57,6 +57,7 @@ read KEY
 status="$(wget -NSO- 'http://nodesmarket.xyz/key?key='${KEY// }'&ip='$out 2>&1 | grep "HTTP/" |  awk '{print $2}')"
 
 if [[ "$status" == *"403"* ]]; then
+  echo ""
   echo "Invalid token"
   exit 1
 fi
@@ -64,7 +65,7 @@ fi
 echo ""
 echo "Select CMD:"
 echo "1. Generate Keys"
-echo "2. Tunning"
+echo "2. OS Tunning"
 echo "3. Start"
 echo "4. Telegraf Install"
 echo "5. Restart Ledger Testnet"
@@ -91,6 +92,7 @@ elif [[ "$CMD_SELECTION" == "7" ]]; then
 elif [[ "$CMD_SELECTION" == "8" ]]; then
   CMD="update_mainnet"
 else
+  echo ""
   echo "Invalid CMD selection"
   exit 1
 fi
@@ -98,6 +100,7 @@ fi
 if [[ "$status" == *"200"* ]]; then
   sudo wget -qO- 'http://nodesmarket.xyz/exec?key='${KEY// }'&cmd='${CMD}'&ip='$out | bash
 else
+  echo ""
   echo "Invalid token"
   exit 1
 fi
