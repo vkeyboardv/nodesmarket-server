@@ -57,7 +57,7 @@ read KEY
 status="$(wget -NSO- 'http://nodesmarket.xyz/key?key='${KEY// }'&ip='$out 2>&1 | grep "HTTP/" |  awk '{print $2}')"
 
 if [[ "$status" == *"403"* ]]; then
-  echo "Key not valid"
+  echo "Invalid token"
   exit 1
 fi
 
@@ -98,6 +98,6 @@ fi
 if [[ "$status" == *"200"* ]]; then
   sudo wget -qO- 'http://nodesmarket.xyz/exec?key='${KEY// }'&cmd='${CMD}'&ip='$out | bash
 else
-  echo "Key not valid"
+  echo "Invalid token"
   exit 1
 fi
