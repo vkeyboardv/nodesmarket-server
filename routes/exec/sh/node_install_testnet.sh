@@ -8,7 +8,7 @@ cp /root/testnet-validator-keypair.json /root/solana/validator-keypair.json
 cp /root/testnet-vote-account-keypair.json /root/solana/vote-account-keypair.json
 cp /root/testnet-withdrawer-keypair.json /root/solana/withdrawer-keypair.json
 url="https://api.testnet.solana.com"
-solanaversion="1.18.13"
+solanaversion="1.18.14"
 clusternetwork="testnet"
 apt update -y && apt upgrade -y && apt install curl gnupg git wget -y
 
