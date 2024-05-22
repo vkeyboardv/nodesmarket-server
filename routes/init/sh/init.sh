@@ -78,7 +78,7 @@ read CMD_SELECTION
 if [[ "$CMD_SELECTION" == "1" ]]; then
   CMD="generate_keys"
 elif [[ "$CMD_SELECTION" == "2" ]]; then
-  CMD="os_tunning"
+  CMD="os_tuning"
 elif [[ "$CMD_SELECTION" == "3" ]]; then
   CMD="node_install_testnet"
 elif [[ "$CMD_SELECTION" == "4" ]]; then
