@@ -1,5 +1,5 @@
 #!/bin/bash
-solana_version="1.18.14"
+solana_version="1.18.17"
 SOLANA_DIR=/root/solana
 echo -e "\033[0;32mStarting update Solana node to version $solana_version\033[0m"
 current_version=$(solana --version | awk '{print $2}')

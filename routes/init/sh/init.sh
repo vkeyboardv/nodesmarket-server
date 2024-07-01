@@ -67,11 +67,13 @@ echo "Select CMD:"
 echo "1. Generate Keys"
 echo "2. OS Tuning"
 echo "3. Node Install (Testnet)"
-echo "4. Telegraf Install"
-echo "5. Restart Ledger (Testnet)"
-echo "6. Restart Ledger (Mainnet)"
-echo "7. Update Version (Testnet)"
-echo "8. Update Version (Mainnet)"
+echo "4. Node Install (Mainnet)"
+echo "5. Telegraf Install (Testnet)"
+echo "6. Telegraf Install (Mainnet)"
+echo "7. Restart Ledger (Testnet)"
+echo "8. Restart Ledger (Mainnet)"
+echo "9. Update Version (Testnet)"
+echo "10. Update Version (Mainnet)"
 read CMD_SELECTION
 
 # Determine CMD based on user selection
@@ -82,14 +84,18 @@ elif [[ "$CMD_SELECTION" == "2" ]]; then
 elif [[ "$CMD_SELECTION" == "3" ]]; then
   CMD="node_install_testnet"
 elif [[ "$CMD_SELECTION" == "4" ]]; then
-  CMD="telegraf_install"
+  CMD="node_install_mainnet"
 elif [[ "$CMD_SELECTION" == "5" ]]; then
-  CMD="restart_ledger_testnet"
+  CMD="telegraf_install_testnet"
 elif [[ "$CMD_SELECTION" == "6" ]]; then
-  CMD="restart_ledger_mainnet"
+  CMD="telegraf_install_mainnet"
 elif [[ "$CMD_SELECTION" == "7" ]]; then
+  CMD="restart_ledger_testnet"
+elif [[ "$CMD_SELECTION" == "9" ]]; then
+  CMD="restart_ledger_mainnet"
+elif [[ "$CMD_SELECTION" == "9" ]]; then
   CMD="update_version_testnet"
-elif [[ "$CMD_SELECTION" == "8" ]]; then
+elif [[ "$CMD_SELECTION" == "10" ]]; then
   CMD="update_version_mainnet"
 else
   echo ""

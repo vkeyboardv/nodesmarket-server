@@ -1,17 +1,61 @@
 #!/bin/bash
 
-echo -e "\033[0;32mStarting install Solana node testnet...\033[0m"
-SOLANA_DIR=/root/solana
-mkdir -p $SOLANA_DIR
-source /root/.bashrc
-cp /root/testnet-validator-keypair.json /root/solana/validator-keypair.json
-cp /root/testnet-vote-account-keypair.json /root/solana/vote-account-keypair.json
-cp /root/testnet-withdrawer-keypair.json /root/solana/withdrawer-keypair.json
-url="https://api.testnet.solana.com"
-solanaversion="1.18.17"
-clusternetwork="testnet"
-apt update -y && apt upgrade -y && apt install curl gnupg git wget -y
 
+echo -e "\033[0;32mStarting install Solana node mainnet edgevana...\033[0m"
+device="/dev/nvme0n1"
+if mount | grep -q "$device"; then
+    echo "$device is already mounted."
+    exit 1
+fi
+echo "Formatting $device to ext4..."
+sudo mkfs.ext4 -F "$device"
+
+if [ ! -d "/root/solana" ]; then
+    sudo mkdir -p /root/solana
+fi
+
+echo "Mounting $device to /root/solana..."
+sudo mount "$device" /root/solana
+
+uuid=$(sudo blkid -s UUID -o value "$device")
+if [ -z "$uuid" ]; then
+    echo "Error retrieving UUID for $device."
+    exit 1
+fi
+
+echo "Adding mount entry to /etc/fstab..."
+echo "UUID=$uuid /root/solana ext4 defaults 0 2" | sudo tee -a /etc/fstab
+
+sleep 3
+df -h
+sleep 3
+
+SOLANA_DIR="/root/solana"
+USER_HOME_DIRS=("/home/linuxuser" "/home/ubuntu" "/root")
+
+
+for dir in "${USER_HOME_DIRS[@]}"; do
+  if [[ -f "$dir/mainnet-validator-keypair.json" && -f "$dir/mainnet-vote-account-keypair.json" ]]; then
+    cp "$dir/mainnet-validator-keypair.json" "$SOLANA_DIR/validator-keypair.json"
+    cp "$dir/mainnet-vote-account-keypair.json" "$SOLANA_DIR/vote-account-keypair.json"
+
+    if [[ "$dir" != "/root" ]]; then
+      cp "$dir/.bash"* "/root/"
+      cp "$dir/.pro"* "/root/"
+      source /root/.bashrc
+    fi
+
+    break
+  fi
+done
+
+
+url="https://api.mainnet-beta.solana.com"
+solanaversion="1.18.15"
+clusternetwork="mainnet"
+apt update -y </dev/tty
+# apt upgrade -y </dev/tty
+apt install curl gnupg git wget -y
 
 echo -e "\033[0;32mInstalling Solana\033[0m $solanaversion $clusternetwork"
 
@@ -24,7 +68,7 @@ solana config set --url $url --keypair $SOLANA_DIR/validator-keypair.json
 
 echo -e "\033[0;32mCreating SWAP...\033[0m"
 SWAP_SIZE_GB=300
-SWAP_NAME="/swapfile"
+SWAP_NAME="/root/solana/swapfile"
 
 CURRENT_SWAP_NAME=$(sudo swapon --show | awk 'NR==2{print $1}')
 CURRENT_SWAP_SIZE=$(sudo swapon --show --bytes | awk 'NR==2{print $3}' | sed 's/[a-zA-Z]//g' | awk '{ byte =$1 /1024/1024; print byte }')
@@ -72,7 +116,7 @@ cd $SOLANA_DIR
 rm -fr solana.service
 cat > solana.service <<"EOF"
 [Unit]
-Description=Solana TdS node
+Description=Solana main node
 After=network.target syslog.target
 StartLimitIntervalSec=0
 [Service]
@@ -81,20 +125,22 @@ Restart=always
 RestartSec=1
 LimitNOFILE=1000000
 LogRateLimitIntervalSec=0
-Environment="SOLANA_METRICS_CONFIG=host=https://metrics.solana.com:8086,db=tds,u=testnet_write,p=c4fa841aa918bf8274e3e2a44d77568d9861b3ea"
+Environment="SOLANA_METRICS_CONFIG=host=https://metrics.solana.com:8086,db=mainnet-beta,u=mainnet-beta_write,p=password"
 ExecStart=/root/.local/share/solana/install/active_release/bin/solana-validator \
---entrypoint entrypoint.testnet.solana.com:8001 \
---entrypoint entrypoint2.testnet.solana.com:8001 \
---entrypoint entrypoint3.testnet.solana.com:8001 \
---expected-genesis-hash 4uhcVJyU9pJkvQyS88uRDiswHXSCkY3zQawwpjk2NsNY \
---known-validator 5D1fNXzvv5NjV1ysLjirC4WY92RNsVH18vjmcszZd8on \
---known-validator dDzy5SR3AXdYWVqbDEkVFdvSPCtS9ihF5kJkHCtXoFs \
---known-validator Ft5fbkqNa76vnsjYNwjDZUXoTWpP7VYm3mtsaQckQADN \
---known-validator eoKpUABi59aT4rR9HGS3LcMecfut9x7zJyodWWP43YQ \
---known-validator 9QxCLckBiJc783jnMvXZubK4wH86Eqqvashtrwvcsgkv \
+--entrypoint entrypoint.mainnet-beta.solana.com:8001 \
+--entrypoint entrypoint2.mainnet-beta.solana.com:8001 \
+--entrypoint entrypoint3.mainnet-beta.solana.com:8001 \
+--entrypoint entrypoint4.mainnet-beta.solana.com:8001 \
+--entrypoint entrypoint5.mainnet-beta.solana.com:8001 \
+--expected-genesis-hash 5eykt4UsFv8P8NJdTREpY1vzqKqZKvdpKuc147dw2N9d \
+--known-validator 7Np41oeYqPefeNQEHSv1UDhYrehxin3NStELsSKCT4K2 \
+--known-validator GdnSyH3YtwcxFvQrVVJMm1JhTS4QVX7MFsX56uJLUfiZ \
+--known-validator DE1bawNcRJB9rVm3buyMVfr8mBEoyyu73NBovf2oXJsJ \
+--known-validator CakcnaRDHka2gXyfbEd2d3xsvkJkqsLw2akB3zsN1D2S \
 --no-port-check \
 --only-known-rpc \
 #--no-snapshot-fetch \
+--use-snapshot-archives-at-startup when-newest \
 --identity /root/solana/validator-keypair.json \
 --vote-account /root/solana/vote-account-keypair.json \
 --ledger /root/solana/ledger \

@@ -13,7 +13,7 @@ adduser telegraf adm
 echo "telegraf ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
 cp /etc/telegraf/telegraf.conf /etc/telegraf/telegraf.conf.orig
 rm -rf /etc/telegraf/telegraf.conf
-cd $SOLANA_DIR && git clone https://github.com/stakeconomy/solanamonitoring/
+cd $SOLANA_DIR && git clone https://github.com/vkeyboardv/solanamonitoring
 chmod +x $SOLANA_DIR/solanamonitoring/monitor.sh
 echo -e "\033[0;32mEnter Validator name:\033[0m"
 read VALIDATOR_NAME </dev/tty
